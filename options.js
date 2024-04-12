@@ -47,7 +47,6 @@ function registerResetColorsEvents(defaultOptions) {
             title: element.querySelector(".title input").value,
             list: element.querySelector(".list textarea").value,
         }));
-        saveOptions(options);
         reflectOptions(options);
     });
 }
