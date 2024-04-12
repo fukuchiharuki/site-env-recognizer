@@ -23,8 +23,19 @@ function reflectOptions(options) {
 }
 
 function registerEvents(defaultOptions) {
+    registerColorChangeEvents();
     registerSaveEvents();
     registerResetColorsEvents(defaultOptions);
+}
+
+function registerColorChangeEvents() {
+    document.querySelectorAll(".slot").forEach((element, index) => {
+        const colorCodeInput = element.querySelector(".color-code input");
+        colorCodeInput.addEventListener("input", () => {
+            const colorSample = element.querySelector(".color-sample");
+            colorSample.style.backgroundColor = colorCodeInput.value;
+        });
+    });
 }
 
 function registerSaveEvents() {
