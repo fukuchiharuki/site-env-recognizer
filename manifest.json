@@ -8,8 +8,11 @@
     ],
     "options_page": "options.html",
     "action": {
-        "default_icon": "./alert-svgrepo-com.png"
+        "default_icon": "./alert-svgrepo-com-16x16.png"
     },
+    "icons": {
+        "48": "./alert-svgrepo-com-48x48.png"
+      },
     "content_scripts": [
         {
             "matches": [
