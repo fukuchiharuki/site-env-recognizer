@@ -2,7 +2,7 @@ const defaultOptions = [
     {
         color: "#E60012",
         title: "Production",
-        list: "https://google.com/"
+        list: "https://example.com/"
     },
     {
         color: "#F39800",
