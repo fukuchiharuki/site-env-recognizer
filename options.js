@@ -67,6 +67,6 @@ function saveOptions(options) {
     const message = document.querySelector("#message");
     message.innerHTML = "Saved successfully.";
     setTimeout(() => {
-        message.innerHTML = "Don't forget to save it.";
+        message.innerHTML = "Don't forget to save.";
     }, 1500);
 }
