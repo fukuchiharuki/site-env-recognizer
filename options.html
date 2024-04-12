@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+    }
+
+    h1 {
+        margin-left: 16px;
+    }
+
+    .settings {
+        display: flex;
+        justify-content: space-around;
+    }
+
+    .slot {
+        flex-basis: 23%;
+    }
+
+    .slot .color-sample {
+        display: inline-block;
+        width: 1em;
+        height: 1em;
+    }
+
+    .slot .color-code input {
+        width: 6em;
+    }
+
+    .slot .title input {
+        width: 95%;
+    }
+
+    .slot .list textarea {
+        width: 95%;
+    }
+
+    .slot .comment {
+        opacity: 0.5;
+    }
+
+    .actions {
+        margin: 32px;
+        text-align: center;
+    }
+
+    .actions>div {
+        margin: 16px;
+    }
+
+    .actions a {
+        text-decoration: underline;
+    }
+
+    .actions a:hover {
+        cursor: pointer;
+    }
+</style>
+
+<body>
+    <h1>SiteEnvRecognizer</h1>
+    <hr />
+    <div class="settings">
+        <div class="slot">
+            <div class="color">
+                <h3>Color</h3>
+                <span class="color-sample"></span>
+                <span class="color-code">
+                    <input type="text" name="color" />
+                </span>
+            </div>
+            <div class="title">
+                <h3>Title</h3>
+                <input type="text" name="title" />
+            </div>
+            <div class="list">
+                <h3>List</h3>
+                <p class="comment">One URL per line.</p>
+                <textarea name="list" rows="8"></textarea>
+            </div>
+        </div>
+        <div class="slot">
+            <div class="color">
+                <h3>Color</h3>
+                <span class="color-sample"></span>
+                <span class="color-code">
+                    <input type="text" name="color" />
+                </span>
+            </div>
+            <div class="title">
+                <h3>Title</h3>
+                <input type="text" name="title" />
+            </div>
+            <div class="list">
+                <h3>List</h3>
+                <p class="comment">One URL per line.</p>
+                <textarea name="list" rows="8"></textarea>
+            </div>
+        </div>
+        <div class="slot">
+            <div class="color">
+                <h3>Color</h3>
+                <span class="color-sample"></span>
+                <span class="color-code">
+                    <input type="text" name="color" />
+                </span>
+            </div>
+            <div class="title">
+                <h3>Title</h3>
+                <input type="text" name="title" />
+            </div>
+            <div class="list">
+                <h3>List</h3>
+                <p class="comment">One URL per line.</p>
+                <textarea name="list" rows="8"></textarea>
+            </div>
+        </div>
+        <div class="slot">
+            <div class="color">
+                <h3>Color</h3>
+                <span class="color-sample"></span>
+                <span class="color-code">
+                    <input type="text" name="color" />
+                </span>
+            </div>
+            <div class="title">
+                <h3>Title</h3>
+                <input type="text" name="title" />
+            </div>
+            <div class="list">
+                <h3>List</h3>
+                <p class="comment">One URL per line.</p>
+                <textarea name="list" rows="8"></textarea>
+            </div>
+        </div>
+    </div>
+    <div class="actions">
+        <div>
+            <button id="save">Save</button>
+        </div>
+        <div>
+            <a id="reset-colors">Reset to default colors</a>
+        </div>
+    </div>
+    <script src="storage.js"></script>
+    <script src="options.js"></script>
+</body>
+
+</html>
