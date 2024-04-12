@@ -35,7 +35,7 @@ function registerSaveEvents() {
             title: element.querySelector(".title input").value,
             list: element.querySelector(".list textarea").value,
         }));
-        setOptions(options);
+        saveOptions(options);
     });
 }
 
@@ -47,7 +47,16 @@ function registerResetColorsEvents(defaultOptions) {
             title: element.querySelector(".title input").value,
             list: element.querySelector(".list textarea").value,
         }));
-        setOptions(options);
+        saveOptions(options);
         reflectOptions(options);
     });
+}
+
+function saveOptions(options) {
+    setOptions(options);
+    const message = document.querySelector("#message");
+    message.innerHTML = "Saved successfully.";
+    setTimeout(() => {
+        message.innerHTML = "Don't forget to save it.";
+    }, 1500);
 }
