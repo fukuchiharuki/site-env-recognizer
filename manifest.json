@@ -4,6 +4,7 @@
     "description": "This extension will help you notice which environment website you are viewing.",
     "version": "1.0.0",
     "permissions": [
+        "activeTab",
         "storage"
     ],
     "options_page": "options.html",
