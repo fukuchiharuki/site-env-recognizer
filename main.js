@@ -31,6 +31,11 @@ function appendSticky(props) {
   sticky.style.zIndex = 2147483647;
   sticky.style.textAlign = "center";
   sticky.style.padding = "8px";
+  sticky.style.letterSpacing = "1px";
+  sticky.style.fontFamily =
+    '"游明朝", YuMincho, "Hiragino Mincho ProN W3", "ヒラギノ明朝 ProN W3", "Hiragino Mincho ProN", "HG明朝E", "ＭＳ Ｐ明朝", "ＭＳ 明朝", serif';
+  sticky.style.fontStyle = "italic";
+  sticky.style.fontWeight = "bold";
   sticky.style.opacity = 0.8;
   sticky.style.pointerEvents = "none";
   document.querySelector("body").appendChild(sticky);
