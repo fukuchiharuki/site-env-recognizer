@@ -3,7 +3,7 @@
   "name": "SiteEnvRecognizer",
   "description": "This extension will help you notice which environment website you are viewing.",
   "version": "1.1.0",
-  "permissions": ["activeTab", "storage"],
+  "permissions": ["storage"],
   "options_page": "options.html",
   "action": {
     "default_icon": "./icon_16x16.png"
