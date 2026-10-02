@@ -7,7 +7,7 @@ function onLoad() {
     const url = window.location.href;
     const props = findProps(options, url);
     const sticky = appendSticky(props);
-    keepItLowKeyOnMouseMoving(sticky);
+    keepItLowKeyOnHover(sticky);
   });
 }
 
@@ -28,13 +28,21 @@ function appendSticky(props) {
   return sticky;
 }
 
-function keepItLowKeyOnMouseMoving(sticky) {
-  document.addEventListener("mousemove", () => {
-    sticky.classList.add("site-env-recognizer-sticky--low-key");
+function keepItLowKeyOnHover(sticky) {
+  const hoverMargin = 8;
 
-    clearTimeout(sticky._timeout);
-    sticky._timeout = setTimeout(() => {
-      sticky.classList.remove("site-env-recognizer-sticky--low-key");
-    }, 250);
+  document.addEventListener("mousemove", (event) => {
+    const rect = sticky.getBoundingClientRect();
+    const isHovered =
+      event.clientX >= rect.left - hoverMargin &&
+      event.clientX <= rect.right + hoverMargin &&
+      event.clientY >= rect.top - hoverMargin &&
+      event.clientY <= rect.bottom + hoverMargin;
+
+    sticky.classList.toggle("site-env-recognizer-sticky--low-key", isHovered);
+  });
+
+  document.addEventListener("mouseleave", () => {
+    sticky.classList.remove("site-env-recognizer-sticky--low-key");
   });
 }
