@@ -1,166 +1,131 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>WhereEnv Settings</title>
+    <link rel="stylesheet" href="options.css" />
+  </head>
 
-<style>
-    body {
-        margin: 0;
-        padding: 0;
-    }
-
-    h1 {
-        margin-left: 16px;
-    }
-
-    h1 img {
-        height: 2rem;
-        vertical-align: bottom;
-    }
-
-    hr {
-        border-top: 1px dashed #8c8b8b;
-    }
-
-    .settings {
-        display: flex;
-        justify-content: space-around;
-    }
-
-    .slot {
-        flex-basis: 23%;
-    }
-
-    .slot .color-sample {
-        display: inline-block;
-        width: 1em;
-        height: 1em;
-    }
-
-    .slot .color-code input {
-        width: 6em;
-    }
-
-    .slot .title input {
-        width: 95%;
-    }
-
-    .slot .list textarea {
-        width: 95%;
-    }
-
-    .slot .comment {
-        opacity: 0.5;
-    }
-
-    .actions {
-        margin: 32px;
-        text-align: center;
-    }
-
-    .actions #message {
-        color: dimgray;
-    }
-
-    .actions>div {
-        margin: 16px;
-    }
-
-    .actions a {
-        text-decoration: underline;
-    }
-
-    .actions a:hover {
-        cursor: pointer;
-    }
-</style>
-
-<body>
-    <h1><img src="./icon_48x48.png" /> SiteEnvRecognizer</h1>
-    <hr />
-    <div class="settings">
-        <div class="slot">
-            <div class="color">
-                <h3>Color</h3>
-                <span class="color-sample"></span>
-                <span class="color-code">
-                    <input type="text" name="color" />
-                </span>
-            </div>
-            <div class="title">
-                <h3>Title</h3>
-                <input type="text" name="title" />
-            </div>
-            <div class="list">
-                <h3>URL List</h3>
-                <p class="comment">One URL per line.</p>
-                <textarea name="list" rows="8"></textarea>
-            </div>
-        </div>
-        <div class="slot">
-            <div class="color">
-                <h3>Color</h3>
-                <span class="color-sample"></span>
-                <span class="color-code">
-                    <input type="text" name="color" />
-                </span>
-            </div>
-            <div class="title">
-                <h3>Title</h3>
-                <input type="text" name="title" />
-            </div>
-            <div class="list">
-                <h3>URL List</h3>
-                <p class="comment">One URL per line.</p>
-                <textarea name="list" rows="8"></textarea>
-            </div>
-        </div>
-        <div class="slot">
-            <div class="color">
-                <h3>Color</h3>
-                <span class="color-sample"></span>
-                <span class="color-code">
-                    <input type="text" name="color" />
-                </span>
-            </div>
-            <div class="title">
-                <h3>Title</h3>
-                <input type="text" name="title" />
-            </div>
-            <div class="list">
-                <h3>URL List</h3>
-                <p class="comment">One URL per line.</p>
-                <textarea name="list" rows="8"></textarea>
-            </div>
-        </div>
-        <div class="slot">
-            <div class="color">
-                <h3>Color</h3>
-                <span class="color-sample"></span>
-                <span class="color-code">
-                    <input type="text" name="color" />
-                </span>
-            </div>
-            <div class="title">
-                <h3>Title</h3>
-                <input type="text" name="title" />
-            </div>
-            <div class="list">
-                <h3>URL List</h3>
-                <p class="comment">One URL per line.</p>
-                <textarea name="list" rows="8"></textarea>
-            </div>
-        </div>
-    </div>
-    <div class="actions">
-        <p id="message">Don't forget to save.</p>
+  <body>
+    <header class="page-header">
+      <div class="page-header__inner">
+        <img src="./icon_48x48.png" alt="" />
         <div>
-            <button id="save">Save</button>
+          <h1>WhereEnv</h1>
+          <p>Make each environment recognizable at a glance.</p>
         </div>
-        <div>
-            <a id="reset-colors">Reset to default colors</a>
+      </div>
+    </header>
+
+    <main>
+      <section aria-labelledby="environments-heading">
+        <div class="section-heading">
+          <div>
+            <h2 id="environments-heading">Environments</h2>
+            <p>Earlier environments take priority when URLs overlap.</p>
+          </div>
+          <button
+            id="add-environment"
+            class="button button--secondary"
+            type="button"
+          >
+            &plus; Add environment
+          </button>
         </div>
-    </div>
+
+        <div id="settings" class="settings"></div>
+        <p id="empty-state" class="empty-state" hidden>
+          No environments yet. Add one to get started.
+        </p>
+      </section>
+    </main>
+
+    <footer class="save-bar">
+      <div class="save-bar__inner">
+        <button id="reset-defaults" class="button button--text" type="button">
+          Reset to defaults
+        </button>
+        <p class="save-status" aria-live="polite">
+          <span class="save-status__dot" aria-hidden="true"></span>
+          <span id="message">All changes saved</span>
+        </p>
+        <button id="save" class="button button--primary" type="button" disabled>
+          Save changes
+        </button>
+      </div>
+    </footer>
+
+    <template id="environment-template">
+      <article class="slot">
+        <header class="slot__header">
+          <div class="slot__identity">
+            <span class="slot__number"></span>
+            <strong class="slot__name"></strong>
+          </div>
+          <div class="slot__actions">
+            <button
+              class="icon-button"
+              data-action="move-up"
+              type="button"
+              title="Move up"
+            >
+              <span aria-hidden="true">↑</span>
+            </button>
+            <button
+              class="icon-button"
+              data-action="move-down"
+              type="button"
+              title="Move down"
+            >
+              <span aria-hidden="true">↓</span>
+            </button>
+            <button class="delete-button" data-action="delete" type="button">
+              Delete
+            </button>
+          </div>
+        </header>
+
+        <div class="slot__fields">
+          <label class="field field--title">
+            <span class="field__label">Title</span>
+            <input
+              name="title"
+              type="text"
+              autocomplete="off"
+              placeholder="Production"
+            />
+          </label>
+
+          <label class="field field--color">
+            <span class="field__label">Color</span>
+            <span class="color-input">
+              <span class="color-sample" aria-hidden="true"></span>
+              <input
+                name="color"
+                type="text"
+                autocomplete="off"
+                spellcheck="false"
+                placeholder="#E60012"
+              />
+            </span>
+          </label>
+
+          <label class="field field--urls">
+            <span class="field__label">URL list</span>
+            <span class="field__hint">One URL prefix per line</span>
+            <textarea
+              name="list"
+              rows="5"
+              spellcheck="false"
+              placeholder="https://example.com/"
+            ></textarea>
+          </label>
+        </div>
+      </article>
+    </template>
+
     <script src="storage.js"></script>
     <script src="options.js"></script>
-</body>
-
+  </body>
 </html>
