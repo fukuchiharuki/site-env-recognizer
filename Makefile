@@ -1,6 +1,6 @@
 all: package.zip
 
-package.zip: *.json *.html *.js *.svg *.png
+package.zip: *.json *.html *.js *.png
 	zip -r ./package.zip . -x \
 	*.git/* \
 	.gitignore \

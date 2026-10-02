@@ -1,31 +1,22 @@
 {
-    "manifest_version": 3,
-    "name": "SiteEnvRecognizer",
-    "description": "This extension will help you notice which environment website you are viewing.",
-    "version": "1.0.0",
-    "permissions": [
-        "activeTab",
-        "storage"
-    ],
-    "options_page": "options.html",
-    "action": {
-        "default_icon": "./alert-svgrepo-com-16x16.png"
-    },
-    "icons": {
-        "48": "./alert-svgrepo-com-48x48.png"
-      },
-    "content_scripts": [
-        {
-            "matches": [
-                "https://*/*",
-                "http://*/*"
-            ],
-            "run_at": "document_end",
-            "all_frames": false,
-            "js": [
-                "storage.js",
-                "main.js"
-            ]
-        }
-    ]
+  "manifest_version": 3,
+  "name": "SiteEnvRecognizer",
+  "description": "This extension will help you notice which environment website you are viewing.",
+  "version": "1.1.0",
+  "permissions": ["activeTab", "storage"],
+  "options_page": "options.html",
+  "action": {
+    "default_icon": "./icon_16x16.png"
+  },
+  "icons": {
+    "48": "./icon_48x48.png"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://*/*", "http://*/*"],
+      "run_at": "document_end",
+      "all_frames": false,
+      "js": ["storage.js", "main.js"]
+    }
+  ]
 }
