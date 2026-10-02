@@ -1,6 +1,8 @@
+.PHONY: all clean format
+
 all: package.zip
 
-package.zip: *.json *.html *.js *.png
+package.zip: *.json *.html *.js *.css *.png
 	zip -r ./package.zip . -x \
 	*.git/* \
 	.gitignore \
@@ -11,3 +13,6 @@ package.zip: *.json *.html *.js *.png
 
 clean: 
 	rm ./package.zip
+
+format:
+	npx --yes prettier@3.9.8 --write "*.css" "*.js" "*.html" manifest.json
