@@ -1,0 +1,28 @@
+.site-env-recognizer-sticky {
+  opacity: 0.9;
+
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+
+  border-radius: 4px;
+
+  padding: 6px 14px;
+  color: white;
+
+  font:
+    600 12px system-ui,
+    sans-serif;
+  letter-spacing: 0.08em;
+
+  transform: rotate(3deg);
+
+  z-index: 2147483647;
+  pointer-events: none;
+
+  box-shadow: 0 2px 6px rgb(0 0 0 / 20%);
+}
+
+.site-env-recognizer-sticky--low-key {
+  opacity: 0.1;
+}
