@@ -16,6 +16,7 @@
       "matches": ["https://*/*", "http://*/*"],
       "run_at": "document_end",
       "all_frames": false,
+      "css": ["main.css"],
       "js": ["storage.js", "main.js"]
     }
   ]
