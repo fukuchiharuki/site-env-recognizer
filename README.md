@@ -1,10 +1,20 @@
-# SiteEnvRecognizer
+# WhereEnv
 
-This Google-Chrome extension will help you notice which environment website you are viewing.
+A Chrome extension that makes website environments recognizable at a glance with colored sticky labels.
 
 ## Features
 
-This extension displays a notice on the page according to the URL.
+- Display custom labels and colors based on URL prefixes.
+- Add, delete, and reorder environments to set matching priority.
+- Fade labels when the pointer approaches them, while allowing clicks through.
 
-![Screenshot 1](docs/screenshot-1.png)
-![Screenshot 2](docs/screenshot-2.png)
+## Usage
+
+Click the extension icon to open settings. Configure each environment's title, color, and URL prefixes (one per line), then save. Earlier environments take priority when URLs overlap.
+
+![Environment labels](docs/store-screenshot-2.png)
+![Environment settings](docs/store-screenshot-3.png)
+
+## Development
+
+Run `make` to create `package.zip`, or `make format` to format the source files with Prettier.
