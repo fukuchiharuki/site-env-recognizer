@@ -40,3 +40,22 @@ function mergeOptions(storageOptions) {
 function setOptions(options) {
   chrome.storage.sync.set({ options });
 }
+
+const defaultDisplaySettings = {
+  sticky: true,
+  border: false,
+};
+
+function getDisplaySettings(callback) {
+  chrome.storage.sync.get(["display"], (value) => {
+    const displaySettings = {
+      ...defaultDisplaySettings,
+      ...value.display,
+    };
+    callback(displaySettings);
+  });
+}
+
+function setDisplaySettings(displaySettings) {
+  chrome.storage.sync.set({ display: displaySettings });
+}
