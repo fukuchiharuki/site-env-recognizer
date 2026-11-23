@@ -15,7 +15,7 @@
     sans-serif;
   letter-spacing: 0.08em;
 
-  transform: rotate(3deg);
+  transform: rotate(-3deg);
 
   z-index: 2147483647;
   pointer-events: none;
