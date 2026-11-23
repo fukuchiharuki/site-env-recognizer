@@ -1,5 +1,16 @@
 # Changelog
 
+## [1.3.0] - 2026-11-23
+
+### Added
+
+- Add display settings for independently toggling the sticky label and page border.
+- Add a fixed, environment-colored page border that does not affect page layout.
+
+### Changed
+
+- Adjust the sticky label angle to match the extension icon and screenshots.
+
 ## [1.2.0] - 2026-10-02
 
 ### Changed
