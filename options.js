@@ -3,14 +3,24 @@
 document.addEventListener("DOMContentLoaded", onLoad, false);
 
 let savedOptionsSnapshot;
+let savedDisplaySettingsSnapshot;
 
 function onLoad() {
   getOptions((options) => {
-    savedOptionsSnapshot = serializeOptions(options);
-    renderOptions(options);
-    registerEvents(defaultOptions);
-    updateSaveState();
+    getDisplaySettings((displaySettings) => {
+      savedOptionsSnapshot = serializeOptions(options);
+      savedDisplaySettingsSnapshot = serializeDisplaySettings(displaySettings);
+      renderDisplaySettings(displaySettings);
+      renderOptions(options);
+      registerEvents(defaultOptions, defaultDisplaySettings);
+      updateSaveState();
+    });
   });
+}
+
+function renderDisplaySettings(displaySettings) {
+  document.querySelector('[name="sticky"]').checked = displaySettings.sticky;
+  document.querySelector('[name="border"]').checked = displaySettings.border;
 }
 
 function renderOptions(options) {
@@ -32,8 +42,12 @@ function createEnvironmentCard(option) {
   return card;
 }
 
-function registerEvents(defaultOptions) {
+function registerEvents(defaultOptions, defaultDisplaySettings) {
   const settings = document.querySelector("#settings");
+
+  document
+    .querySelector("#display-settings")
+    .addEventListener("change", updateSaveState);
 
   settings.addEventListener("input", (event) => {
     const card = event.target.closest(".slot");
@@ -63,9 +77,11 @@ function registerEvents(defaultOptions) {
     addEnvironment(defaultOptions);
   });
   document.querySelector("#reset-defaults").addEventListener("click", () => {
-    resetOptions(defaultOptions);
+    resetSettings(defaultOptions, defaultDisplaySettings);
   });
-  document.querySelector("#save").addEventListener("click", saveCurrentOptions);
+  document
+    .querySelector("#save")
+    .addEventListener("click", saveCurrentSettings);
 }
 
 function addEnvironment(defaultOptions) {
@@ -137,9 +153,17 @@ function updateColorSample(card) {
   sample.classList.toggle("color-sample--invalid", !isValid);
 }
 
-function resetOptions(defaultOptions) {
+function resetSettings(defaultOptions, defaultDisplaySettings) {
+  renderDisplaySettings(defaultDisplaySettings);
   renderOptions(defaultOptions);
   updateSaveState();
+}
+
+function readDisplaySettings() {
+  return {
+    sticky: document.querySelector('[name="sticky"]').checked,
+    border: document.querySelector('[name="border"]').checked,
+  };
 }
 
 function readOptions() {
@@ -150,16 +174,33 @@ function readOptions() {
   }));
 }
 
-function saveCurrentOptions() {
+function saveCurrentSettings() {
   const options = readOptions();
+  const displaySettings = readDisplaySettings();
+
   setOptions(options);
+  setDisplaySettings(displaySettings);
   savedOptionsSnapshot = serializeOptions(options);
+  savedDisplaySettingsSnapshot = serializeDisplaySettings(displaySettings);
   updateSaveState();
 }
 
 function updateSaveState() {
-  const isUnsaved = serializeOptions(readOptions()) !== savedOptionsSnapshot;
+  const hasUnsavedOptions =
+    serializeOptions(readOptions()) !== savedOptionsSnapshot;
+  const hasUnsavedDisplaySettings =
+    serializeDisplaySettings(readDisplaySettings()) !==
+    savedDisplaySettingsSnapshot;
+  const isUnsaved = hasUnsavedOptions || hasUnsavedDisplaySettings;
+
   setSaveStatus(isUnsaved ? "Unsaved changes" : "All changes saved", isUnsaved);
+}
+
+function serializeDisplaySettings(displaySettings) {
+  return JSON.stringify([
+    Boolean(displaySettings.sticky),
+    Boolean(displaySettings.border),
+  ]);
 }
 
 function serializeOptions(options) {

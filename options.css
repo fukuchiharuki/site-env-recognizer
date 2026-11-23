@@ -77,6 +77,10 @@ main {
   padding: 32px 0 24px;
 }
 
+main > section + section {
+  margin-top: 36px;
+}
+
 .section-heading {
   display: flex;
   gap: 24px;
@@ -88,6 +92,54 @@ main {
 h2 {
   margin-bottom: 5px;
   font-size: 18px;
+}
+
+.display-settings {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.display-option {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  padding: 16px;
+  background: #ffffff;
+  border: 1px solid #dde1e6;
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgb(32 33 36 / 6%);
+  cursor: pointer;
+}
+
+.display-option:hover {
+  border-color: #c5cad1;
+}
+
+.display-option input {
+  flex: 0 0 auto;
+  width: 18px;
+  height: 18px;
+  margin: 1px 0 0;
+  padding: 0;
+  accent-color: #4f5dcc;
+}
+
+.display-option__content {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.display-option__content strong {
+  font-size: 14px;
+}
+
+.display-option__content > span {
+  color: #6b7280;
+  font-size: 12px;
+  line-height: 1.45;
 }
 
 .settings {
