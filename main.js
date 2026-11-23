@@ -4,10 +4,23 @@ window.addEventListener("load", onLoad, false);
 
 function onLoad() {
   getOptions((options) => {
-    const url = window.location.href;
-    const props = findProps(options, url);
-    const sticky = appendSticky(props);
-    keepItLowKeyOnHover(sticky);
+    getDisplaySettings((displaySettings) => {
+      const url = window.location.href;
+      const props = findProps(options, url);
+
+      if (!props) {
+        return;
+      }
+
+      if (displaySettings.sticky) {
+        const sticky = appendSticky(props);
+        keepItLowKeyOnHover(sticky);
+      }
+
+      if (displaySettings.border) {
+        appendFrame(props);
+      }
+    });
   });
 }
 
@@ -26,6 +39,14 @@ function appendSticky(props) {
   sticky.style.backgroundColor = props.color;
   document.querySelector("body").appendChild(sticky);
   return sticky;
+}
+
+function appendFrame(props) {
+  const frame = document.createElement("div");
+  frame.classList.add("site-env-recognizer-frame");
+  frame.setAttribute("aria-hidden", "true");
+  frame.style.setProperty("--site-env-recognizer-color", props.color);
+  document.querySelector("body").appendChild(frame);
 }
 
 function keepItLowKeyOnHover(sticky) {
